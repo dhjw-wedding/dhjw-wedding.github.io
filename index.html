@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
+<meta name="color-scheme" content="light only">
 <title>최동희 · 최정원 결혼합니다</title>
 <!--
   아직 뼈대만 있는 상태입니다. 내용은 정해지는 대로 채웁니다.
@@ -13,6 +14,7 @@
 -->
 <style>
   :root{
+    color-scheme:light;   /* 브라우저가 알아서 어둡게 바꾸지 않도록 */
     --bg:#fbf9f7; --ink:#2f2a28; --muted:#8b817b; --line:#eae3dd;
     --accent:#8a6a52; --card:#fff;
   }
@@ -105,29 +107,15 @@
     width:32px; height:32px; border-radius:50%; background:#8a6a52; color:#fff; font-weight:800}
   .cal .ym{font-size:.92rem; font-weight:800; color:#5c4432; margin-bottom:4px}
   .addcal{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:16px}
-  .addcal a{border:1px solid #d9cbbd; background:#f7f1ea; border-radius:999px; padding:9px 17px;
-    font-size:.88rem; font-weight:700; color:#5c4432; text-decoration:none}
-  .addcal a.main{background:#8a6a52; border-color:#8a6a52; color:#fff}
+  .addcal a{border:1px solid #8a6a52; background:#8a6a52; border-radius:999px; padding:9px 17px;
+    font-size:.88rem; font-weight:700; color:#fff; text-decoration:none}
+  .calnote{margin-top:10px; font-size:.82rem; color:var(--muted)}
+  .calnote b{color:#5c4432}
   footer{padding:26px 20px 40px; text-align:center; color:var(--muted); font-size:.78rem}
-  @media (prefers-color-scheme: dark){
-    :root{--bg:#171514; --ink:#ece7e3; --muted:#9c918a; --line:#2c2725; --card:#1d1a19; --accent:#c9a684}
-    .cover, .gallery a{background:#262120}
-    body::after{background:linear-gradient(180deg, rgba(23,21,20,.72), rgba(23,21,20,.86))}
-    body::before{opacity:.26}
-    main{background:rgba(29,26,25,.86); box-shadow:0 0 60px rgba(0,0,0,.5)}
-    section:nth-of-type(odd){background:rgba(38,33,32,.72)}
-    section:nth-of-type(even){background:rgba(29,26,25,.5)}
-    section.pic{background:rgba(29,26,25,.62)}
-    section.pic::before{opacity:.22}
-    .btns a{background:#221f1e; color:var(--ink)}
-    details.acc{background:#241f1c; border-color:#4a3d33}
-    details.acc>summary{background:#2c2521; color:#e6d3c0}
-    details.acc>summary::after{color:#c9a684}
-    .acct .bank{color:#e0cdb9}
-    .acct .no{color:#fff}
-    .copy{background:#c9a684; color:#241f1c}
-    .copy.done{background:#7fbf9a; color:#152019}
-  }
+  /* 다크 모드는 쓰지 않는다 — 안드로이드 다크 모드에서 청첩장이 통째로
+     어둡게 나온다는 이야기를 듣고 뺐다(2026-09-06). 청첩장은 누가 봐도
+     같은 색이어야 한다. */
+
 </style>
 </head>
 <body>
@@ -190,9 +178,10 @@
       <table><thead><tr><th class="sun">일</th><th class="">월</th><th class="">화</th><th class="">수</th><th class="">목</th><th class="">금</th><th class="sat">토</th></tr></thead><tbody><tr><td class="on sun"><span>1</span></td><td class="">2</td><td class="">3</td><td class="">4</td><td class="">5</td><td class="">6</td><td class="sat">7</td></tr><tr><td class="sun">8</td><td class="">9</td><td class="">10</td><td class="">11</td><td class="">12</td><td class="">13</td><td class="sat">14</td></tr><tr><td class="sun">15</td><td class="">16</td><td class="">17</td><td class="">18</td><td class="">19</td><td class="">20</td><td class="sat">21</td></tr><tr><td class="sun">22</td><td class="">23</td><td class="">24</td><td class="">25</td><td class="">26</td><td class="">27</td><td class="sat">28</td></tr><tr><td class="sun">29</td><td class="">30</td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table>
     </div>
     <div class="addcal">
-      <a class="main" href="wedding.ics">📅 캘린더에 추가</a>
       <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%EC%B5%9C%EB%8F%99%ED%9D%AC%20%C2%B7%20%EC%B5%9C%EC%A0%95%EC%9B%90%20%EA%B2%B0%ED%98%BC%EC%8B%9D&dates=20261101T033000Z/20261101T053000Z&location=%EB%8D%94S%EC%9B%A8%EB%94%A9%ED%99%80%20%EB%B6%80%EC%82%B0%20%EB%82%A8%EA%B5%AC%20%EC%A0%84%ED%8F%AC%EB%8C%80%EB%A1%9C%2026&details=https%3A%2F%2Fdhjw-wedding.github.io%2F" target="_blank" rel="noopener">구글 캘린더</a>
+      <a href="wedding.ics">애플·기타 (.ics)</a>
     </div>
+    <div class="calnote">네이버 캘린더를 쓰시면 <b>.ics 파일</b>을 받아 「가져오기」 해 주세요.</div>
   </section>
 
   <section>
