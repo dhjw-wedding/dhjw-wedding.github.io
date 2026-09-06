@@ -68,7 +68,7 @@
 
   <section>
     <div class="names"><span class="ph">신랑 이름</span> &nbsp;&amp;&nbsp; <span class="ph">신부 이름</span></div>
-    <div class="when ph">0000년 00월 00일 0요일 오후 0시</div>
+    <div class="when">2026년 11월 1일 일요일 오후 12시 30분</div>
     <div class="where ph">예식장 이름 · 홀 이름</div>
   </section>
 
@@ -87,7 +87,7 @@
   <section>
     <h2>예식 안내</h2>
     <dl>
-      <dt>일시</dt><dd class="ph">0000년 00월 00일 0요일 오후 0시</dd>
+      <dt>일시</dt><dd>2026년 11월 1일 일요일 오후 12시 30분</dd>
       <dt>장소</dt><dd class="ph">예식장 이름 · 홀 이름</dd>
       <dt>주소</dt><dd class="ph">도로명 주소</dd>
     </dl>
@@ -113,9 +113,26 @@
     </div>
   </section>
 
+  <section>
+    <h2>D-day</h2>
+    <p id="dday" class="ph">계산 중…</p>
+  </section>
+
   <footer>
     아직 준비 중인 페이지입니다.
   </footer>
+
+  <script>
+  /* 남은 날짜만 자동으로 — 예식 2026-11-01 12:30 (한국시간) */
+  (function () {
+    var t = new Date('2026-11-01T12:30:00+09:00');
+    var el = document.getElementById('dday');
+    var d = Math.ceil((t - new Date()) / 86400000);
+    el.className = '';
+    el.textContent = d > 0 ? '결혼식까지 ' + d + '일 남았습니다' :
+                     d === 0 ? '오늘입니다' : '함께한 지 ' + (-d) + '일';
+  })();
+  </script>
 
 </main>
 </body>
