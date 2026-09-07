@@ -117,6 +117,22 @@
   .addcal{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:16px}
   .addcal a{border:1px solid #8a6a52; background:#8a6a52; border-radius:999px; padding:9px 17px;
     font-size:.88rem; font-weight:700; color:#fff; text-decoration:none}
+  /* 갤러리 라이트박스 — 파일로 넘어가지 않고 페이지 안에서 크게 본다 */
+  .lb{position:fixed; inset:0; z-index:90; background:rgba(20,17,15,.94);
+    display:none; align-items:center; justify-content:center}
+  .lb.on{display:flex}
+  .lb img{max-width:96vw; max-height:86vh; object-fit:contain; border-radius:4px;
+    -webkit-user-select:none; user-select:none}
+  .lb .x{position:absolute; top:14px; right:16px; width:40px; height:40px; border-radius:50%;
+    border:0; background:rgba(255,255,255,.16); color:#fff; font-size:1.3rem; cursor:pointer;
+    line-height:1}
+  .lb .nav{position:absolute; top:50%; transform:translateY(-50%); width:46px; height:64px;
+    border:0; background:rgba(255,255,255,.13); color:#fff; font-size:1.5rem; cursor:pointer}
+  .lb .prev{left:8px; border-radius:0 8px 8px 0}
+  .lb .next{right:8px; border-radius:8px 0 0 8px}
+  .lb .cnt{position:absolute; bottom:16px; left:0; right:0; text-align:center; color:#e8dfd6;
+    font-size:.86rem; letter-spacing:.05em}
+  @media (max-width:520px){ .lb .nav{width:38px; height:54px; font-size:1.2rem} }
   footer{padding:26px 20px 40px; text-align:center; color:var(--muted); font-size:.78rem}
   /* 다크 모드는 쓰지 않는다 — 안드로이드 다크 모드에서 청첩장이 통째로
      어둡게 나온다는 이야기를 듣고 뺐다(2026-09-06). 청첩장은 누가 봐도
@@ -202,8 +218,6 @@
         <p class="li">지하 주차장이 차면 <b>건물 앞 주차요원</b>이 그때그때 빈 주차장으로
            안내해 드립니다. 안내에 따라 이동해 주세요. <b>3시간 무료</b>입니다.</p>
         <p class="li">외부 주차장으로 안내받으신 경우 <b>셔틀 차량</b>이 오갑니다.</p>
-        <p class="li"><b>대절버스</b>는 건물 입구에 잠시 정차해 하객분들을 내려 주시면,
-           주차 안내요원이 주차하실 위치를 알려 드립니다.</p>
       </div>
     </details>
   </section>
@@ -268,6 +282,68 @@
     el.className = '';
     el.textContent = d > 0 ? '결혼식까지 ' + d + '일 남았습니다' :
                      d === 0 ? '오늘입니다' : '함께한 지 ' + (-d) + '일';
+  })();
+
+  /* ── 갤러리 라이트박스 ─────────────────────────────────────────────
+     사진을 눌러도 **주소가 바뀌지 않게** 하고, 대신 히스토리에 한 칸을 쌓는다.
+     그래야 폰에서 「뒤로 가기」로 그냥 닫힌다(요청 사항). */
+  (function () {
+    var links = [].slice.call(document.querySelectorAll('.gallery a'));
+    if (!links.length) return;
+    var srcs = links.map(function (a) { return a.getAttribute('href'); });
+    var box = document.createElement('div');
+    box.className = 'lb';
+    box.id = 'lb';
+    box.innerHTML = '<button class="x" aria-label="닫기">✕</button>'
+      + '<button class="nav prev" aria-label="이전">‹</button>'
+      + '<img alt="">'
+      + '<button class="nav next" aria-label="다음">›</button>'
+      + '<div class="cnt"></div>';
+    document.body.appendChild(box);
+    var img = box.querySelector('img');
+    var cnt = box.querySelector('.cnt');
+    var i = 0, open = false;
+
+    function show(k) {
+      i = (k + srcs.length) % srcs.length;
+      img.src = srcs[i];
+      cnt.textContent = (i + 1) + ' / ' + srcs.length;
+    }
+    function openAt(k) {
+      show(k);
+      box.classList.add('on');
+      document.body.style.overflow = 'hidden';
+      if (!open) { history.pushState({lb: 1}, ''); open = true; }
+    }
+    function close(byBack) {
+      box.classList.remove('on');
+      document.body.style.overflow = '';
+      if (open && !byBack) history.back();
+      open = false;
+    }
+    links.forEach(function (a, k) {
+      a.addEventListener('click', function (e) { e.preventDefault(); openAt(k); });
+    });
+    box.querySelector('.x').onclick = function () { close(); };
+    box.querySelector('.prev').onclick = function (e) { e.stopPropagation(); show(i - 1); };
+    box.querySelector('.next').onclick = function (e) { e.stopPropagation(); show(i + 1); };
+    box.addEventListener('click', function (e) { if (e.target === box || e.target === img) close(); });
+    window.addEventListener('popstate', function () { if (open) close(true); });
+    document.addEventListener('keydown', function (e) {
+      if (!open) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') show(i - 1);
+      if (e.key === 'ArrowRight') show(i + 1);
+    });
+    /* 스와이프 */
+    var x0 = null;
+    box.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, {passive: true});
+    box.addEventListener('touchend', function (e) {
+      if (x0 === null) return;
+      var dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 45) show(i + (dx < 0 ? 1 : -1));
+      x0 = null;
+    }, {passive: true});
   })();
 
   /* 계좌번호 복사 */
