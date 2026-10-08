@@ -140,6 +140,22 @@
   .lb .cnt{position:absolute; bottom:16px; left:0; right:0; text-align:center; color:#e8dfd6;
     font-size:.86rem; letter-spacing:.05em}
   @media (max-width:520px){ .lb .nav{width:38px; height:54px; font-size:1.2rem} }
+  /* 언어 단추 — 오른쪽 위. 청첩장 분위기를 깨지 않게 작고 옅게 */
+  .langbtn{position:absolute; top:13px; right:14px; z-index:5; cursor:pointer;
+    font-family:-apple-system,'Malgun Gothic',sans-serif; font-size:.7rem; font-weight:700;
+    letter-spacing:.14em; line-height:1; padding:8px 12px; border-radius:999px;
+    background:rgba(255,255,255,.84); color:var(--accent); border:1px solid var(--line);
+    -webkit-tap-highlight-color:transparent}
+  .langbtn:active{background:#fff}
+  html[lang=en] dt{white-space:normal}
+  /* 혼주 — 한글은 3단 격자가 딱 맞지만, 영문은 이름이 길어 한 줄에 안 들어간다.
+     (Seoknam Choi · the late Mikyung Kim / their daughter / Jungwon Choi)
+     영문일 때만 두 줄짜리로 편다. */
+  html[lang=en] .hon{display:block; text-align:center; line-height:1.72}
+  html[lang=en] .hon .par{display:block; text-align:center}
+  html[lang=en] .hon .rel{display:inline; white-space:normal; text-align:center}
+  html[lang=en] .hon .kid{display:inline; text-align:center}
+  html[lang=en] .hon .par:nth-of-type(4){margin-top:14px}
   footer{padding:26px 20px 40px; text-align:center; color:var(--muted); font-size:.78rem}
   /* 다크 모드는 쓰지 않는다 — 안드로이드 다크 모드에서 청첩장이 통째로
      어둡게 나온다는 이야기를 듣고 뺐다(2026-09-06). 청첩장은 누가 봐도
@@ -151,86 +167,87 @@
 <main>
 
   <header>
+    <button type="button" class="langbtn" id="langBtn" aria-label="Language">EN</button>
     <div class="en">Wedding Invitation</div>
   </header>
 
   <div class="cover"><img src="images/cover.jpg?v=1789629021" alt=""></div>
 
   <section>
-    <div class="names">최동희 &nbsp;&amp;&nbsp; 최정원</div>
-    <div class="when">2026년 11월 1일 일요일 오후 12시 30분</div>
-    <div class="where">더S웨딩홀 (부산 문현동)</div>
+    <div class="names" data-en="Donghee Choi &nbsp;&amp;&nbsp; Jungwon Choi">최동희 &nbsp;&amp;&nbsp; 최정원</div>
+    <div class="when" data-en="Sunday, 1 November 2026 &middot; 12:30 pm">2026년 11월 1일 일요일 오후 12시 30분</div>
+    <div class="where" data-en="The S Wedding Hall &middot; Munhyeon, Busan">더S웨딩홀 (부산 문현동)</div>
   </section>
 
   <section class="pic">
-    <h2>초대합니다</h2>
-    <p>서로 다른 길을 걸어온 두 사람이<br>
+    <h2 data-en="Invitation">초대합니다</h2>
+    <p data-en="Two people who walked their own paths<br>now look the same way, and walk on together.">서로 다른 길을 걸어온 두 사람이<br>
        이제 같은 곳을 바라보며 걸어가려 합니다.</p>
-    <p>혼자서도 충분했던 하루가<br>
+    <p data-en="A day that was already enough on its own<br>has become better for being shared.">혼자서도 충분했던 하루가<br>
        함께여서 더 좋아졌습니다.</p>
-    <p>저희 두 사람의 첫걸음을<br>
+    <p data-en="If you can be near us to bless our first steps,<br>we will keep that memory gladly<br>for many years to come.">저희 두 사람의 첫걸음을<br>
        가까이에서 축복해 주시면<br>
        오래도록 기쁘게 간직하겠습니다.</p>
   </section>
 
   <section>
-    <h2>혼주</h2>
+    <h2 data-en="Our Families">혼주</h2>
     <div class="hon">
-      <span class="par">최영범 &middot; 박임선</span><span class="rel">의 아들</span><span class="kid">최동희</span>
-      <span class="par">최석남 &middot; <span class="gone">故</span> 김미경</span><span class="rel">의 딸</span><span class="kid">최정원</span>
+      <span class="par" data-en="Youngbeom Choi &middot; Imseon Park">최영범 &middot; 박임선</span><span class="rel" data-en="their son ">의 아들</span><span class="kid" data-en="Donghee Choi">최동희</span>
+      <span class="par" data-en="Seoknam Choi &middot; <span class='gone'>the late</span> Mikyung Kim">최석남 &middot; <span class="gone">故</span> 김미경</span><span class="rel" data-en="their daughter ">의 딸</span><span class="kid" data-en="Jungwon Choi">최정원</span>
     </div>
   </section>
 
   <section>
-    <h2>예식 안내</h2>
+    <h2 data-en="Ceremony">예식 안내</h2>
     <dl>
-      <dt>일시</dt><dd>2026년 11월 1일 일요일 오후 12시 30분</dd>
-      <dt>장소</dt><dd>더S웨딩홀</dd>
-      <dt>주소</dt><dd>부산 남구 전포대로 26 삼성힐타워 1층<br><span style="color:var(--muted);font-size:.92em">2호선 문현역 2·4번 출구</span></dd>
+      <dt data-en="Date">일시</dt><dd data-en="Sunday, 1 November 2026, 12:30 pm">2026년 11월 1일 일요일 오후 12시 30분</dd>
+      <dt data-en="Venue">장소</dt><dd data-en="The S Wedding Hall &mdash; Convention Hall, 1F">더S웨딩홀</dd>
+      <dt data-en="Address">주소</dt><dd data-en="1F, Samsung Hill Tower, 26 Jeonpo-daero, Nam-gu, Busan<br><span style='color:var(--muted);font-size:.92em'>Munhyeon Stn. (Line 2), Exit 2 or 4</span>">부산 남구 전포대로 26 삼성힐타워 1층<br><span style="color:var(--muted);font-size:.92em">2호선 문현역 2·4번 출구</span></dd>
     </dl>
   </section>
 
   <section>
-    <h2>오시는 길</h2>
+    <h2 data-en="Getting There">오시는 길</h2>
     <!-- 식장에서 준 안내도 이미지를 그대로 씁니다 -->
     <a href="images/map.jpg?v=1789629021"><img class="map" src="images/map.jpg?v=1789629021" alt="더S웨딩홀 오시는 길"></a>
     <div class="btns">
-      <a href="https://naver.me/xSFkOZZd" target="_blank" rel="noopener">네이버지도</a>
-      <a href="https://map.kakao.com/link/map/631502686" target="_blank" rel="noopener">카카오맵</a>
+      <a href="https://naver.me/xSFkOZZd" target="_blank" rel="noopener" data-en="Naver Map">네이버지도</a>
+      <a href="https://map.kakao.com/link/map/631502686" target="_blank" rel="noopener" data-en="Kakao Map">카카오맵</a>
     </div>
   </section>
 
 
   <section>
-    <h2>날짜</h2>
+    <h2 data-en="The Day">날짜</h2>
     <div class="cal">
       <div class="ym">2026. 11</div>
-      <table><thead><tr><th class="sun">일</th><th class="">월</th><th class="">화</th><th class="">수</th><th class="">목</th><th class="">금</th><th class="sat">토</th></tr></thead><tbody><tr><td class="on sun"><span>1</span></td><td class="">2</td><td class="">3</td><td class="">4</td><td class="">5</td><td class="">6</td><td class="sat">7</td></tr><tr><td class="sun">8</td><td class="">9</td><td class="">10</td><td class="">11</td><td class="">12</td><td class="">13</td><td class="sat">14</td></tr><tr><td class="sun">15</td><td class="">16</td><td class="">17</td><td class="">18</td><td class="">19</td><td class="">20</td><td class="sat">21</td></tr><tr><td class="sun">22</td><td class="">23</td><td class="">24</td><td class="">25</td><td class="">26</td><td class="">27</td><td class="sat">28</td></tr><tr><td class="sun">29</td><td class="">30</td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table>
+      <table><thead><tr><th class="sun" data-en="S">일</th><th class="" data-en="M">월</th><th class="" data-en="T">화</th><th class="" data-en="W">수</th><th class="" data-en="T">목</th><th class="" data-en="F">금</th><th class="sat" data-en="S">토</th></tr></thead><tbody><tr><td class="on sun"><span>1</span></td><td class="">2</td><td class="">3</td><td class="">4</td><td class="">5</td><td class="">6</td><td class="sat">7</td></tr><tr><td class="sun">8</td><td class="">9</td><td class="">10</td><td class="">11</td><td class="">12</td><td class="">13</td><td class="sat">14</td></tr><tr><td class="sun">15</td><td class="">16</td><td class="">17</td><td class="">18</td><td class="">19</td><td class="">20</td><td class="sat">21</td></tr><tr><td class="sun">22</td><td class="">23</td><td class="">24</td><td class="">25</td><td class="">26</td><td class="">27</td><td class="sat">28</td></tr><tr><td class="sun">29</td><td class="">30</td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table>
     </div>
     <div class="addcal">
-      <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%EC%B5%9C%EB%8F%99%ED%9D%AC%20%C2%B7%20%EC%B5%9C%EC%A0%95%EC%9B%90%20%EA%B2%B0%ED%98%BC%EC%8B%9D&dates=20261101T033000Z/20261101T053000Z&location=%EB%8D%94S%EC%9B%A8%EB%94%A9%ED%99%80%20%EB%B6%80%EC%82%B0%20%EB%82%A8%EA%B5%AC%20%EC%A0%84%ED%8F%AC%EB%8C%80%EB%A1%9C%2026&details=https%3A%2F%2Fdhjw-wedding.github.io%2F" target="_blank" rel="noopener">구글 캘린더</a>
-      <a href="wedding.ics">캘린더 추가</a>
+      <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%EC%B5%9C%EB%8F%99%ED%9D%AC%20%C2%B7%20%EC%B5%9C%EC%A0%95%EC%9B%90%20%EA%B2%B0%ED%98%BC%EC%8B%9D&dates=20261101T033000Z/20261101T053000Z&location=%EB%8D%94S%EC%9B%A8%EB%94%A9%ED%99%80%20%EB%B6%80%EC%82%B0%20%EB%82%A8%EA%B5%AC%20%EC%A0%84%ED%8F%AC%EB%8C%80%EB%A1%9C%2026&details=https%3A%2F%2Fdhjw-wedding.github.io%2F" target="_blank" rel="noopener" data-en="Google Calendar">구글 캘린더</a>
+      <a href="wedding.ics" data-en="Add to calendar">캘린더 추가</a>
     </div>
   </section>
 
   <section>
-    <h2>주차 안내</h2>
+    <h2 data-en="Parking">주차 안내</h2>
     <div class="pk">
-      <div class="big">지하 1층 주차장 · <b>3시간 무료</b></div>
-      <div class="sub2">삼성힐타워 지하 1층 (지하철 4번 출구 지나 우회전)</div>
+      <div class="big" data-en="Basement level 1 &middot; <b>3 hours free</b>">지하 1층 주차장 · <b>3시간 무료</b></div>
+      <div class="sub2" data-en="Samsung Hill Tower B1 &mdash; past subway Exit 4, turn right">삼성힐타워 지하 1층 (지하철 4번 출구 지나 우회전)</div>
     </div>
     <details class="acc" style="margin-top:14px">
-      <summary>자세히 보기</summary>
+      <summary data-en="Details">자세히 보기</summary>
       <div class="acct">
-        <p class="li">지하 주차장이 차면 <b>건물 앞 주차요원</b>이 그때그때 빈 주차장으로
+        <p class="li" data-en="If the basement car park is full, <b>an attendant</b> out front will send you to another one nearby. Either way it is <b>free for 3 hours</b>.">지하 주차장이 차면 <b>건물 앞 주차요원</b>이 그때그때 빈 주차장으로
            안내해 드립니다. 안내에 따라 이동해 주세요. <b>3시간 무료</b>입니다.</p>
-        <p class="li">외부 주차장으로 안내받으신 경우 <b>셔틀 차량</b>이 오갑니다.</p>
+        <p class="li" data-en="If you are sent to an off-site car park, a <b>shuttle</b> runs to and from the hall.">외부 주차장으로 안내받으신 경우 <b>셔틀 차량</b>이 오갑니다.</p>
       </div>
     </details>
   </section>
 
   <section>
-    <h2>갤러리</h2>
+    <h2 data-en="Gallery">갤러리</h2>
     <div class="gallery">
       <a href="images/01.jpg?v=1789629021"><img src="images/01.jpg?v=1789629021" alt="" loading="lazy"></a>
       <a href="images/02.jpg?v=1789629021"><img src="images/02.jpg?v=1789629021" alt="" loading="lazy"></a>
@@ -258,53 +275,67 @@
 
 
   <section>
-    <h2>마음 전하실 곳</h2>
-    <p style="font-size:.92rem">참석이 어려우신 분들을 위해 안내드립니다.<br>
+    <h2 data-en="Gifts">마음 전하실 곳</h2>
+    <p style="font-size:.92rem" data-en="For those who cannot be with us on the day.<br>Your good wishes alone are more than enough.">참석이 어려우신 분들을 위해 안내드립니다.<br>
        축하해 주시는 마음만으로 충분히 감사합니다.</p>
     <details class="acc">
-      <summary>신랑측 계좌</summary>
+      <summary data-en="Groom&rsquo;s side">신랑측 계좌</summary>
       <div class="acct">
-        <div class="bank">하나은행 · 최동희</div>
+        <div class="bank" data-en="Hana Bank &middot; Donghee Choi">하나은행 · 최동희</div>
         <div class="no">313-890672-03807</div>
-        <button class="copy" data-copy="하나은행 313-890672-03807 최동희">계좌번호 복사</button>
+        <button class="copy" data-en="Copy account number" data-copy="하나은행 313-890672-03807 최동희">계좌번호 복사</button>
         <hr class="accline">
-        <div class="bank">부산은행 &middot; 최영범</div>
+        <div class="bank" data-en="Busan Bank &middot; Youngbeom Choi">부산은행 &middot; 최영범</div>
         <div class="no">085-12-000783-5</div>
-        <button class="copy" data-copy="부산은행 085-12-000783-5 최영범">계좌번호 복사</button>
+        <button class="copy" data-en="Copy account number" data-copy="부산은행 085-12-000783-5 최영범">계좌번호 복사</button>
       </div>
     </details>
     <details class="acc">
-      <summary>신부측 계좌</summary>
+      <summary data-en="Bride&rsquo;s side">신부측 계좌</summary>
       <div class="acct">
-        <div class="bank">카카오뱅크 &middot; 최정원</div>
+        <div class="bank" data-en="KakaoBank &middot; Jungwon Choi">카카오뱅크 &middot; 최정원</div>
         <div class="no">3333-16-5479002</div>
-        <button class="copy" data-copy="카카오뱅크 3333165479002 최정원">계좌번호 복사</button>
+        <button class="copy" data-en="Copy account number" data-copy="카카오뱅크 3333165479002 최정원">계좌번호 복사</button>
         <hr class="accline">
-        <div class="bank">부산은행 &middot; 최석남</div>
+        <div class="bank" data-en="Busan Bank &middot; Seoknam Choi">부산은행 &middot; 최석남</div>
         <div class="no">023-03-000715-0</div>
-        <button class="copy" data-copy="부산은행 023-03-000715-0 최석남">계좌번호 복사</button>
+        <button class="copy" data-en="Copy account number" data-copy="부산은행 023-03-000715-0 최석남">계좌번호 복사</button>
       </div>
     </details>
   </section>
 
   <section>
-    <h2>D-day</h2>
+    <h2 data-en="Countdown">D-day</h2>
     <p id="dday" class="ph">계산 중…</p>
   </section>
 
-  <footer>
+  <footer data-en="With love, Donghee &amp; Jungwon">
     최동희 &middot; 최정원 드림
   </footer>
 
   <script>
+  /* ── 언어 상태 ─────────────────────────────────────────────────────
+     움직이는 글(디데이·복사·더보기·라이트박스)은 이걸 보고 한글/영문을 고른다.
+     WI.on(f) 로 등록해 두면 언어가 바뀔 때마다 f 가 다시 불린다. */
+  window.WI = {
+    lang: 'ko',
+    hooks: [],
+    t: function (ko, en) { return window.WI.lang === 'en' ? en : ko; },
+    on: function (f) { window.WI.hooks.push(f); f(); }
+  };
+
   /* 남은 날짜만 자동으로 — 예식 2026-11-01 12:30 (한국시간) */
   (function () {
     var t = new Date('2026-11-01T12:30:00+09:00');
     var el = document.getElementById('dday');
-    var d = Math.ceil((t - new Date()) / 86400000);
-    el.className = '';
-    el.textContent = d > 0 ? '결혼식까지 ' + d + '일 남았습니다' :
-                     d === 0 ? '오늘입니다' : '함께한 지 ' + (-d) + '일';
+    WI.on(function () {
+      var d = Math.ceil((t - new Date()) / 86400000);
+      el.className = '';
+      el.textContent =
+        d > 0   ? WI.t('결혼식까지 ' + d + '일 남았습니다', d + ' days to go') :
+        d === 0 ? WI.t('오늘입니다', 'Today is the day') :
+                  WI.t('함께한 지 ' + (-d) + '일', (-d) + ' days together');
+    });
   })();
 
   /* ── 갤러리 라이트박스 ─────────────────────────────────────────────
@@ -325,6 +356,11 @@
     document.body.appendChild(box);
     var img = box.querySelector('img');
     var cnt = box.querySelector('.cnt');
+    WI.on(function () {
+      box.querySelector('.x').setAttribute('aria-label', WI.t('닫기', 'Close'));
+      box.querySelector('.prev').setAttribute('aria-label', WI.t('이전', 'Previous'));
+      box.querySelector('.next').setAttribute('aria-label', WI.t('다음', 'Next'));
+    });
     var i = 0, open = false;
 
     function show(k) {
@@ -374,9 +410,12 @@
     b.addEventListener('click', function () {
       var t = b.dataset.copy;
       var done = function () {
-        b.textContent = '복사했습니다';
+        b.textContent = WI.t('복사했습니다', 'Copied');
         b.classList.add('done');
-        setTimeout(function () { b.textContent = '계좌번호 복사'; b.classList.remove('done'); }, 1600);
+        setTimeout(function () {
+          b.textContent = WI.t('계좌번호 복사', 'Copy account number');
+          b.classList.remove('done');
+        }, 1600);
       };
       if (navigator.clipboard) { navigator.clipboard.writeText(t).then(done, done); return; }
       var a = document.createElement('textarea');            /* 구형 브라우저용 */
@@ -398,13 +437,70 @@
   if (!g || !b) { return; }
   var n = g.querySelectorAll('a.more').length;
   if (!n) { b.parentNode.style.display = 'none'; return; }
-  var shut = '사진 더 보기 (' + n + '장)';
-  b.textContent = shut;
+  var all = g.querySelectorAll('a').length;
+  function label() {
+    b.textContent = g.classList.contains('open')
+      ? WI.t('접기', 'Show fewer')
+      : WI.t('사진 더 보기 (' + n + '장)', 'Show all ' + all + ' photos');
+  }
+  WI.on(label);
   b.addEventListener('click', function () {
     var open = g.classList.toggle('open');
-    b.textContent = open ? '접기' : shut;
+    label();
     if (!open) { g.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
   });
+})();
+</script>
+
+<script>
+/* ── 한국어 ↔ English ───────────────────────────────────────────────
+   data-en 이 붙은 칸만 바꾼다. 처음 바꿀 때 한글 원문을 data-ko 로 넣어 두므로
+   몇 번을 왕복해도 원문이 상하지 않는다.
+   처음 들어온 사람의 브라우저가 한국어가 아니면 영어로 뜬다 — 고른 건 기억한다. */
+(function () {
+  var btn = document.getElementById('langBtn');
+  var nodes = [].slice.call(document.querySelectorAll('[data-en]'));
+  nodes.forEach(function (n) { n.setAttribute('data-ko', n.innerHTML); });
+
+  var TITLE = { ko: document.title, en: 'Donghee & Jungwon are getting married' };
+
+  function apply(l) {
+    WI.lang = l;
+    nodes.forEach(function (n) {
+      var v = n.getAttribute(l === 'en' ? 'data-en' : 'data-ko');
+      if (v !== null) { n.innerHTML = v; }
+    });
+    document.documentElement.lang = l;
+    document.title = TITLE[l];
+    if (btn) { btn.textContent = (l === 'en' ? '한국어' : 'EN'); }
+    WI.hooks.forEach(function (f) { try { f(); } catch (e) {} });
+    try { localStorage.setItem('dhjw_lang', l); } catch (e) {}
+    /* 주소창도 맞춰 둔다 — 지금 보고 있는 그대로 복사해 보낼 수 있게.
+       pushState 가 아니라 replaceState 라 갤러리 「뒤로 가기」에는 끼어들지 않는다. */
+    try {
+      var u = new URL(location.href);
+      if (l === 'en') { u.searchParams.set('lang', 'en'); } else { u.searchParams.delete('lang'); }
+      if (/^#(?:lang=)?(ko|en)$/i.test(u.hash)) { u.hash = ''; }
+      history.replaceState(history.state, '', u.pathname + u.search + u.hash);
+    } catch (e) {}
+  }
+
+  /* 주소에 실어 보낼 수 있다 — ?lang=en (또는 #en).
+     영어권 하객에게는 링크 자체를 영문으로 보내면 단추를 안 눌러도 된다. */
+  function fromUrl() {
+    var m = /[?&]lang=(ko|en)(?:&|$)/i.exec(location.search) ||
+            /^#(?:lang=)?(ko|en)$/i.exec(location.hash);
+    return m ? m[1].toLowerCase() : null;
+  }
+  var saved = null;
+  try { saved = localStorage.getItem('dhjw_lang'); } catch (e) {}
+  /* 주소 > 전에 고른 것 > 한국어.
+     브라우저 언어로 자동 판단하면 폰을 영어로 쓰는 한국 하객에게 영문이 떠서 그건 쓰지 않는다. */
+  apply(fromUrl() || (saved === 'en' || saved === 'ko' ? saved : 'ko'));
+
+  if (btn) {
+    btn.addEventListener('click', function () { apply(WI.lang === 'en' ? 'ko' : 'en'); });
+  }
 })();
 </script>
 </body>
